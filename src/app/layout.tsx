@@ -1,17 +1,20 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Barlow, Bebas_Neue } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import "./globals.scss";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const barlow = Barlow({
+  variable: "--font-barlow",
   subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  style: ["normal", "italic"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const bebasNeue = Bebas_Neue({
+  variable: "--font-bebas-neue",
   subsets: ["latin"],
+  weight: "400",
 });
 
 export const metadata: Metadata = {
@@ -36,10 +39,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${barlow.variable} ${bebasNeue.variable} antialiased`}
       >
         <div className="min-h-screen bg-white text-neutral-900">
-          <header className="border-b border-black/10">
+          <header className="bg-brand-yellow border-b border-black/10">
             <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
               <Link
                 href="/"

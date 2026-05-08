@@ -9,9 +9,11 @@
 
 @mixin page-title {
   margin-bottom: v.$space-4;
+  font-family: var(--font-bebas-neue), Arial, Helvetica, sans-serif;
   font-size: 2.25rem;
-  font-weight: 600;
-  line-height: 1.2;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 1;
 }
 
 @mixin rich-content {
