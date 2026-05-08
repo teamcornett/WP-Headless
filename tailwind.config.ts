@@ -13,6 +13,10 @@ const config: Config = {
           yellow: "#EFD941",
         },
       },
+      fontFamily: {
+        sans: ["var(--font-barlow)", "Arial", "Helvetica", "sans-serif"],
+        display: ["var(--font-bebas-neue)", "Arial", "Helvetica", "sans-serif"],
+      },
     },
   },
   plugins: [],
