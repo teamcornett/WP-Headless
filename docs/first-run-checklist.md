@@ -1,8 +1,8 @@
-# First Run Checklist (No Existing WP URL)
+# First Run Checklist (Pantheon Backend)
 
-This is the fastest path from zero to seeing a business website frontend pulling real WordPress content.
+Fastest path from zero to seeing the Next.js frontend rendering Pantheon-hosted WordPress content.
 
-## 1) Run Next.js frontend
+## 1) Run the Next.js frontend
 
 ```bash
 npm install
@@ -10,64 +10,55 @@ cp .env.example .env.local
 npm run dev
 ```
 
+`.env.example` already points at the Pantheon dev environment, so no edits are required for a connected first run.
+
 Open:
 
 - [http://localhost:3000](http://localhost:3000)
 
-At this point you should see mock data.
-
-## 2) Run local WordPress backend
+## 2) Confirm Pantheon WordPress is reachable
 
 ```bash
-docker compose -f docker-compose.wordpress.yml up -d
+curl -I https://dev-until-you-ownit.pantheonsite.io/wp-json/wp/v2/posts
 ```
 
-Open:
+Expect `HTTP/2 200`.
 
-- [http://localhost:8080](http://localhost:8080)
+## 3) Clone the Pantheon backend repo (one time)
 
-Complete the WordPress install wizard.
+```bash
+cd ~/Documents
+git clone ssh://codeserver.dev.ccfdbe54-802c-4fec-aff7-367d18097192@codeserver.dev.ccfdbe54-802c-4fec-aff7-367d18097192.drush.in:2222/~/repository.git -b master until-you-ownit
+```
 
-## 3) Create core business pages in WordPress
+You only need this if you'll be editing WordPress code (themes, plugins, mu-plugins). Pantheon's Dev environment must be in **Git mode** in the dashboard for pushes to take effect.
 
-In WordPress Admin:
+## 4) Create the core business pages in WordPress
 
-- `Pages` -> `Add New`
+In `https://dev-until-you-ownit.pantheonsite.io/wp-admin`:
+
+- `Pages` → `Add New`
 - create and publish:
   - About (slug: `about`)
   - Services (slug: `services`)
   - Contact (slug: `contact`)
 
-## 4) (Optional) Add blog posts
+## 5) (Optional) Add blog posts
 
-In WordPress Admin:
+In WP Admin:
 
-- `Posts` -> `Add New`
-- publish 2-3 sample posts
-
-## 5) Point Next.js to local WordPress
-
-Update `.env.local`:
-
-```env
-NEXT_PUBLIC_WORDPRESS_URL=http://localhost:8080
-NEXT_PUBLIC_USE_MOCK_WP=false
-```
-
-Then restart frontend:
-
-```bash
-npm run dev
-```
+- `Posts` → `Add New`
+- publish 2-3 sample posts to populate the homepage
 
 ## 6) Verify end to end
 
 - WordPress API checks:
-  - [http://localhost:8080/wp-json/wp/v2/pages?slug=about](http://localhost:8080/wp-json/wp/v2/pages?slug=about)
-  - [http://localhost:8080/wp-json/wp/v2/posts](http://localhost:8080/wp-json/wp/v2/posts)
+  - [https://dev-until-you-ownit.pantheonsite.io/wp-json/wp/v2/pages?slug=about](https://dev-until-you-ownit.pantheonsite.io/wp-json/wp/v2/pages?slug=about)
+  - [https://dev-until-you-ownit.pantheonsite.io/wp-json/wp/v2/posts](https://dev-until-you-ownit.pantheonsite.io/wp-json/wp/v2/posts)
 - Frontend pages:
+  - [http://localhost:3000](http://localhost:3000)
   - [http://localhost:3000/about](http://localhost:3000/about)
   - [http://localhost:3000/services](http://localhost:3000/services)
   - [http://localhost:3000/contact](http://localhost:3000/contact)
 
-If those pages show your WordPress content, the headless setup is working.
+If those pages render WordPress content, the headless setup is connected to Pantheon.
