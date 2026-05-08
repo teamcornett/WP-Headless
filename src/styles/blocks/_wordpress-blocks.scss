@@ -1,23 +1,80 @@
 /*
-  Shared WordPress block styles.
-  Add plugin/custom block overrides here as your backend grows.
+  Brand overrides for WordPress Gutenberg blocks.
+
+  WordPress core block styling comes from `@wordpress/block-library`, which is
+  imported in `src/app/layout.tsx` before our SCSS. Anything declared here
+  layers on top of WP defaults and should only set rules that express our
+  brand (fonts, colors, spacing tweaks). Avoid duplicating layout rules that
+  WP already provides (`is-layout-flex`, `wp-block-columns`, etc.).
 */
 
+@use "../variables" as v;
+
 .wp-content {
+  // Body copy stays in Barlow (set on body); just normalize spacing rhythm.
   p {
     margin-bottom: 1rem;
   }
 
+  // Headings use the display font (Bebas Neue) for brand consistency
+  // with section titles elsewhere on the site.
+  h1,
   h2,
   h3,
-  h4 {
-    margin: 1.25rem 0 0.75rem;
-    font-weight: 600;
-    line-height: 1.3;
+  h4,
+  h5,
+  h6,
+  .wp-block-heading {
+    font-family: var(--font-bebas-neue), Arial, Helvetica, sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    line-height: 1.1;
   }
 
-  ul,
-  ol {
-    margin: 0 0 1rem 1.25rem;
+  h2,
+  .wp-block-heading {
+    margin-top: v.$space-6;
+    margin-bottom: v.$space-3;
+    font-size: 2rem;
+  }
+
+  h3 {
+    margin-top: v.$space-5;
+    margin-bottom: v.$space-2;
+    font-size: 1.5rem;
+  }
+
+  h4 {
+    margin-top: v.$space-4;
+    margin-bottom: v.$space-2;
+    font-size: 1.25rem;
+  }
+
+  // Subtle radius on inserted images so they feel intentional.
+  .wp-block-image img {
+    border-radius: v.$radius-md;
+  }
+
+  // Brand button: yellow background, dark text, no rounded pill (we want
+  // rectangular to match the editorial tone).
+  .wp-block-button__link {
+    background-color: v.$color-brand-yellow;
+    color: v.$color-fg-light;
+    border-radius: v.$radius-md;
+    font-weight: 600;
+    transition: background-color 0.15s ease;
+
+    &:hover,
+    &:focus {
+      background-color: v.$color-brand-yellow-hover;
+    }
+  }
+
+  // Pull quotes get a brand accent on the left edge.
+  .wp-block-quote,
+  .wp-block-pullquote {
+    border-left: 4px solid v.$color-brand-yellow;
+    padding-left: v.$space-4;
+    font-style: italic;
   }
 }

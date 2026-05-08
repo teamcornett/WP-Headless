@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import { Barlow, Bebas_Neue } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
+// WordPress core block styles. Loaded before our own SCSS so brand
+// overrides in `globals.scss` win the cascade.
+import "@wordpress/block-library/build-style/style.css";
+import "@wordpress/block-library/build-style/theme.css";
 import "./globals.scss";
 
 const barlow = Barlow({
