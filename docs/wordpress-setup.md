@@ -1,57 +1,73 @@
-# WordPress Backend Setup (Business Site)
+# WordPress Backend Setup (Pantheon)
 
-This project is now set up as a business website frontend.
+This project's WordPress backend is hosted on **Pantheon** as the `until-you-ownit` site. Pantheon serves as the single source of truth for WordPress content, themes, plugins, and configuration.
 
-It uses WordPress core REST endpoints:
+The Next.js frontend consumes the WordPress core REST endpoints:
 
 - `wp/v2/pages` for `about`, `services`, `contact`
 - `wp/v2/posts` for latest posts on the homepage
 
-## Option A: Local WordPress with Docker (recommended)
+## Pantheon environments
 
-Use this when you do not have a live WordPress URL yet.
+| Environment | URL |
+| --- | --- |
+| Dev | https://dev-until-you-ownit.pantheonsite.io |
+| Test | https://test-until-you-ownit.pantheonsite.io |
+| Live | https://live-until-you-ownit.pantheonsite.io |
 
-1. Start WordPress + MariaDB:
+## Clone the WordPress codebase locally
+
+The Pantheon site has its own git repo. Clone it as a sibling of this Next.js repo:
 
 ```bash
-docker compose -f docker-compose.wordpress.yml up -d
+cd ~/Documents
+git clone ssh://codeserver.dev.ccfdbe54-802c-4fec-aff7-367d18097192@codeserver.dev.ccfdbe54-802c-4fec-aff7-367d18097192.drush.in:2222/~/repository.git -b master until-you-ownit
 ```
 
-2. Open WordPress setup:
+Prerequisites:
 
-- [http://localhost:8080](http://localhost:8080)
+- Pantheon account with access to the `until-you-ownit` site.
+- Your SSH public key uploaded under **Pantheon → Account → SSH Keys**.
+- The Dev environment in **Git** mode (toggle in the Pantheon dashboard if it's currently in SFTP mode).
 
-3. Complete initial install wizard (site title, admin username/password).
+Standard Pantheon workflow:
 
-4. Create business pages in WordPress Admin:
+1. Make WordPress code changes (themes, plugins, `wp-content`) in the cloned repo.
+2. `git push origin master` to push to Pantheon Dev.
+3. In the Pantheon dashboard, deploy Dev → Test → Live.
 
-- `Pages` -> `Add New`
+## Create the business pages in WordPress
+
+In WP Admin (`https://dev-until-you-ownit.pantheonsite.io/wp-admin`):
+
+- `Pages` → `Add New`
 - Create and publish:
   - `About` (slug: `about`)
   - `Services` (slug: `services`)
   - `Contact` (slug: `contact`)
 
-5. (Optional) create blog posts:
+Optional: publish a few `Posts` so the homepage's "Latest posts" section has content beyond the default `Hello world!`.
 
-- `Posts` -> `Add New`
-- Publish 2-3 posts to populate homepage latest posts
+## Verify the REST API
 
-6. Confirm APIs work:
+```bash
+curl https://dev-until-you-ownit.pantheonsite.io/wp-json/wp/v2/pages?slug=about
+curl https://dev-until-you-ownit.pantheonsite.io/wp-json/wp/v2/posts
+```
 
-- [http://localhost:8080/wp-json/wp/v2/pages?slug=about](http://localhost:8080/wp-json/wp/v2/pages?slug=about)
-- [http://localhost:8080/wp-json/wp/v2/posts](http://localhost:8080/wp-json/wp/v2/posts)
+Both should return JSON.
 
-## Option B: Existing/live WordPress
-
-If you already have WordPress hosting, create the same pages and point the frontend URL to that site.
-
-## Connect Next.js to WordPress
+## Connect Next.js to Pantheon
 
 In `.env.local`:
 
 ```env
-NEXT_PUBLIC_WORDPRESS_URL=http://localhost:8080
+NEXT_PUBLIC_WORDPRESS_URL=https://dev-until-you-ownit.pantheonsite.io
 NEXT_PUBLIC_USE_MOCK_WP=false
 ```
 
-Restart Next.js after changing env values.
+Restart `npm run dev` after changing env values.
+
+## Optional: local WordPress via Docker
+
+`docker-compose.wordpress.yml` is retained as an offline fallback only. Pantheon is the canonical environment for all WordPress work.
