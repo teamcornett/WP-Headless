@@ -39,7 +39,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <div className="min-h-screen bg-white text-neutral-900">
-          <header className="border-b border-black/10">
+          <header className="bg-brand-yellow border-b border-black/10">
             <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
               <Link
                 href="/"
