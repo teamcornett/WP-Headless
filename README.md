@@ -46,7 +46,7 @@ Vercel pulls posts and pages from Pantheon over the WordPress REST API (`/wp-jso
 
 ## Workflow: local development, GitHub, and Vercel
 
-Frontend GitHub remote: [`teamcornett/headlesswordpress`](https://github.com/teamcornett/headlesswordpress) — this is what Vercel deploys from. (You may also see a personal `therealboone/WP-Headless` remote; the deployable remote is `teamcornett`.)
+Frontend GitHub remote: [`therealboone/WP-Headless`](https://github.com/therealboone/WP-Headless) (`origin`) — this is the repo Vercel deploys from. A mirror exists at [`teamcornett/headlesswordpress`](https://github.com/teamcornett/headlesswordpress) (`teamcornett`) for team visibility, but Vercel is wired to `origin`, so production-bound pushes must go to `origin`.
 
 1. **Local** — Use `.env.local` (gitignored) for WordPress URL and mock flags. Default points at the Pantheon dev environment.
 2. **GitHub** — Push branches; Vercel builds on push when the project is linked to that repo.
@@ -126,7 +126,7 @@ git pull
 
 ## Deploying to Vercel
 
-1. [Vercel](https://vercel.com) → **Add New… → Project** → import [`teamcornett/headlesswordpress`](https://github.com/teamcornett/headlesswordpress) (or **Settings → Git** on an existing project).
+1. [Vercel](https://vercel.com) → **Add New… → Project** → import [`therealboone/WP-Headless`](https://github.com/therealboone/WP-Headless) (or **Settings → Git** on an existing project).
 2. **Settings → Environment Variables** — add for **Production**, **Preview**, and optionally **Development**:
    - **`NEXT_PUBLIC_WORDPRESS_URL`** — Pantheon site base URL (no `/wp-json`; the app adds that path). Recommended mapping:
      - Production → `https://live-until-you-ownit.pantheonsite.io` (or the mapped custom domain once Live is launched)
