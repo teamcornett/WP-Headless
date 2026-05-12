@@ -61,7 +61,7 @@ export default function RootLayout({
                   priority
                 />
               </Link>
-              <nav className="flex items-center gap-5 text-sm">
+              <nav className="flex items-center gap-5 text-lg font-bold uppercase text-black">
                 <Link href="/" className="hover:underline underline-offset-4">
                   Home
                 </Link>

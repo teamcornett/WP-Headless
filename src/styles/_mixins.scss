@@ -1,6 +1,6 @@
 @use "variables" as v;
 
-@mixin page-shell($max-width: 48rem) {
+@mixin page-shell($max-width: 1140px) {
   margin: 0 auto;
   min-height: 100vh;
   max-width: $max-width;
@@ -17,12 +17,8 @@
 }
 
 @mixin rich-content {
-  color: rgb(64 64 64);
+  color: #000000;
   line-height: 1.7;
-
-  @media (prefers-color-scheme: dark) {
-    color: v.$color-text-muted-dark;
-  }
 }
 
 @mixin respond-md {

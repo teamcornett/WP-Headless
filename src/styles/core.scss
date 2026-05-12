@@ -6,15 +6,14 @@
   --foreground: #{v.$color-fg-light};
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #{v.$color-bg-dark};
-    --foreground: #{v.$color-fg-dark};
-  }
-}
-
 body {
   background: #ffffff;
-  color: var(--foreground);
+  color: #000000;
   font-family: var(--font-barlow), Arial, Helvetica, sans-serif;
+  font-size: 1.125rem;
+}
+
+p {
+  color: #000000;
+  font-weight: 500;
 }

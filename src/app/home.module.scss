@@ -2,7 +2,7 @@
 @use "../styles/variables" as v;
 
 .main {
-  @include m.page-shell(56rem);
+  @include m.page-shell();
 }
 
 .hero {
