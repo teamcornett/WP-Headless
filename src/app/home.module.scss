@@ -18,10 +18,11 @@
 
 .title {
   font-family: var(--font-bebas-neue), Arial, Helvetica, sans-serif;
-  font-size: 2.25rem;
+  font-size: 5rem;
   font-weight: 400;
   letter-spacing: 0.02em;
-  line-height: 1;
+  line-height: 5rem;
+  color: #3764E5;
   margin-top: v.$space-3;
 }
 
@@ -86,7 +87,7 @@
 
 @include m.respond-md {
   .title {
-    font-size: 3rem;
+    font-size: 5rem;
   }
 }
 

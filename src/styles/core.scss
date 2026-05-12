@@ -14,6 +14,28 @@ body {
 }
 
 p {
-  color: #000000;
   font-weight: 500;
+}
+
+h1 {
+  font-size: 5rem;
+  line-height: 5rem;
+  color: #3764E5;
+}
+
+h2 {
+  position: relative;
+  z-index: 0;
+}
+
+h2::before {
+  content: "";
+  display: block;
+  background-color: #EFD941;
+  width: 100%;
+  height: 30px;
+  left: -9px;
+  top: 53px;
+  position: relative;
+  z-index: -1;
 }

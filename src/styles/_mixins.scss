@@ -10,10 +10,11 @@
 @mixin page-title {
   margin-bottom: v.$space-4;
   font-family: var(--font-bebas-neue), Arial, Helvetica, sans-serif;
-  font-size: 2.25rem;
+  font-size: 5rem;
   font-weight: 400;
   letter-spacing: 0.02em;
-  line-height: 1;
+  line-height: 5rem;
+  color: #3764E5;
 }
 
 @mixin rich-content {

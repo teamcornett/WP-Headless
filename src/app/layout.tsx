@@ -89,8 +89,8 @@ export default function RootLayout({
 
           {children}
 
-          <footer className="border-t border-black/10">
-            <div className="mx-auto max-w-5xl px-6 py-6 text-xs text-neutral-600">
+          <footer className="bg-[#3764E5] text-white">
+            <div className="mx-auto max-w-5xl px-6 py-6 text-xs">
               <p>
                 {new Date().getFullYear()} Headless Business Site. Built with
                 Next.js + WordPress.
