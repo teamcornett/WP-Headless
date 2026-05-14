@@ -112,6 +112,7 @@ The Next.js frontend has hardcoded routes that read specific WP page slugs. Crea
 | Frontend route | WP page slug | Title (suggested) |
 | --- | --- | --- |
 | `/about` | `about` | About |
+| `/be-counted` | `be-counted` | Be Counted |
 | `/services` | `services` | Services |
 | `/contact` | `contact` | Contact |
 

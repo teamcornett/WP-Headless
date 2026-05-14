@@ -72,6 +72,12 @@ export default function RootLayout({
                   About
                 </Link>
                 <Link
+                  href="/be-counted"
+                  className="hover:underline underline-offset-4"
+                >
+                  Be Counted
+                </Link>
+                <Link
                   href="/services"
                   className="hover:underline underline-offset-4"
                 >

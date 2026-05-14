@@ -94,7 +94,7 @@ export async function getBusinessPages(): Promise<WordPressPage[]> {
   }
 
   return requestWordPressJSON<WordPressPage[]>(
-    "/wp/v2/pages?slug=about,services,contact&_fields=id,slug,link,title,excerpt,content",
+    "/wp/v2/pages?slug=about,be-counted,services,contact&_fields=id,slug,link,title,excerpt,content",
   );
 }
 
@@ -151,6 +151,19 @@ function getMockPages(): WordPressPage[] {
       content: {
         rendered:
           "<p>We are a modern business focused on measurable results, long-term partnerships, and practical digital solutions.</p>",
+      },
+      link: "#",
+    },
+    {
+      id: 2015,
+      slug: "be-counted",
+      title: { rendered: "Be Counted" },
+      excerpt: {
+        rendered: "Join the community and be counted.",
+      },
+      content: {
+        rendered:
+          "<p>This page will load from WordPress when a published page with slug <code>be-counted</code> exists.</p>",
       },
       link: "#",
     },

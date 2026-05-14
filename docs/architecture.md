@@ -37,9 +37,10 @@ src/
     layout.tsx          # Site shell, fonts, header/footer
     page.tsx            # Homepage, renders WP posts
     [slug]/page.tsx     # Catch-all dynamic WP pages
-    about/page.tsx      # WP page slug "about"
-    services/page.tsx   # WP page slug "services"
-    contact/page.tsx    # WP page slug "contact"
+    about/page.tsx       # WP page slug "about"
+    be-counted/page.tsx  # WP page slug "be-counted"
+    services/page.tsx    # WP page slug "services"
+    contact/page.tsx     # WP page slug "contact"
     globals.scss        # Tailwind layers + global styles
   lib/
     wordpress.ts        # WP REST helpers + types + mock fallback

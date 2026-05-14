@@ -14,7 +14,7 @@ The frontend is in mock mode. Either:
 
 After fixing locally: restart `npm run dev`. After fixing on Vercel: redeploy.
 
-### `/about`, `/services`, or `/contact` is blank or 404
+### `/about`, `/be-counted`, `/services`, or `/contact` is blank or 404
 
 The matching WordPress page hasn't been created, or the slug doesn't match.
 

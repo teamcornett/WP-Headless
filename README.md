@@ -39,7 +39,7 @@ For everything else — accounts, the WordPress backend repo, deploy flows, cach
 
 ```
 src/
-  app/                 # App Router routes (page.tsx, [slug], about, services, contact, layout)
+  app/                 # App Router routes (page.tsx, [slug], about, be-counted, services, contact, layout)
   lib/wordpress.ts     # REST helpers, types, mock fallback
 public/                # Static assets
 docs/                  # Documentation (start with architecture.md)

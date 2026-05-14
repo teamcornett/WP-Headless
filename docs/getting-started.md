@@ -117,10 +117,11 @@ curl -I https://dev-until-you-ownit.pantheonsite.io/wp-json/wp/v2/posts
 
 - [http://localhost:3000](http://localhost:3000) — homepage with posts
 - [http://localhost:3000/about](http://localhost:3000/about) — pulls WP page slug `about`
+- [http://localhost:3000/be-counted](http://localhost:3000/be-counted) — pulls WP page slug `be-counted`
 - [http://localhost:3000/services](http://localhost:3000/services)
 - [http://localhost:3000/contact](http://localhost:3000/contact)
 
-If any of `/about`, `/services`, `/contact` is blank, the matching page hasn't been created yet on Pantheon. Create it in WP Admin (see [wordpress-pantheon.md](./wordpress-pantheon.md#required-page-slugs-for-the-frontend)).
+If any of `/about`, `/be-counted`, `/services`, `/contact` is blank, the matching page hasn't been created yet on Pantheon. Create it in WP Admin (see [wordpress-pantheon.md](./wordpress-pantheon.md#required-page-slugs-for-the-frontend)).
 
 **c) Network requests hit Pantheon**
 
