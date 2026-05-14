@@ -1,0 +1,14 @@
+/**
+ * Front-end + editor canvas: outer band is full width; inner matches site column.
+ */
+.wp-block-ownit-fullbleed {
+	box-sizing: border-box;
+	min-height: 2rem;
+}
+
+.wp-block-ownit-fullbleed__inner {
+	max-width: 1140px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 1.5rem);
+}

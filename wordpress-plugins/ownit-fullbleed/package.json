@@ -1,0 +1,12 @@
+{
+  "name": "ownit-fullbleed",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "wp-scripts build",
+    "start": "wp-scripts start"
+  },
+  "devDependencies": {
+    "@wordpress/scripts": "^30.8.1"
+  }
+}

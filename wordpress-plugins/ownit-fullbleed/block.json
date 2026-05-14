@@ -1,0 +1,40 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "ownit/fullbleed",
+  "version": "1.0.0",
+  "title": "Full Bleed",
+  "category": "layout",
+  "icon": "align-wide",
+  "description": "Full browser width section with a background color or image and any blocks inside.",
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "spacing": {
+      "padding": true,
+      "margin": true
+    }
+  },
+  "textdomain": "ownit-fullbleed",
+  "editorScript": "file:./build/index.js",
+  "editorStyle": "file:./build/index.css",
+  "style": "file:./build/style-index.css",
+  "attributes": {
+    "backgroundColor": {
+      "type": "string",
+      "default": ""
+    },
+    "backgroundImageId": {
+      "type": "number",
+      "default": 0
+    },
+    "backgroundImageUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "backgroundImageAlt": {
+      "type": "string",
+      "default": ""
+    }
+  }
+}

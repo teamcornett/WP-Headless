@@ -84,6 +84,10 @@ Note: cloning DB/files **overwrites** the destination's content. Don't tick that
 3. The plugin **files** are now on Pantheon Dev. Activation is a database action and works in Git mode:
    - Go to https://dev-until-you-ownit.pantheonsite.io/wp-admin/plugins.php → click **Activate** on the new plugin.
 
+### Custom block: Full Bleed (from this repo)
+
+The Next.js repo ships a WordPress plugin at [`wordpress-plugins/ownit-fullbleed/`](../wordpress-plugins/ownit-fullbleed/) (`ownit/fullbleed` block: full viewport width band, background color or image, inner blocks). Copy the whole `ownit-fullbleed` folder into Pantheon’s `wp-content/plugins/`, run `npm install && npm run build` inside it after edits, commit, push, then activate **Own It Full Bleed** in WP Admin. Headless styling for the saved markup lives in [`src/styles/blocks/_wordpress-blocks.scss`](../src/styles/blocks/_wordpress-blocks.scss) (search for `ownit-fullbleed`).
+
 ### Alternative: temporary SFTP mode
 
 If you'd rather use WP Admin's installer:
@@ -121,6 +125,25 @@ Other pages you create can be reached via `/[slug]` — see [`src/app/[slug]/pag
 - **Pages** are reachable via their slug under `/[slug]`.
 - WordPress publishes immediately by default. Drafts and scheduled posts are not exposed by REST until they're `publish` status.
 - Featured images and media are returned by REST when the frontend asks for them. Today the frontend doesn't render featured images — adding that is a frontend change.
+
+### Gutenberg: custom CSS classes (e.g. `about-tag`)
+
+You do **not** need a plugin for this in core WordPress:
+
+1. Select the block (Group, Paragraph, Heading, Columns, etc.).
+2. Open the **block settings** sidebar → **Advanced**.
+3. In **Additional CSS class(es)**, enter space-separated classes, e.g. `about-tag`.
+
+Those classes are saved on the block’s wrapper in the HTML. The headless Next app renders `content.rendered` as HTML inside `.wp-content`, so any class you add must have matching styles in the frontend repo — see [`src/styles/blocks/_wordpress-blocks.scss`](../src/styles/blocks/_wordpress-blocks.scss) (search for `about-tag`). Add new utility classes there as you introduce them in the editor.
+
+### Gutenberg: section background images
+
+Use one of these patterns (both output markup the REST API returns unchanged):
+
+- **Group** — With a recent WordPress version, select the Group → **Styles** / **Background** (wording varies by version) → set a **background image**. WordPress saves `style="background-image: url(...); ..."` on the group wrapper.
+- **Cover** — Insert a **Cover** block, set the image, add inner blocks. Core block CSS from `@wordpress/block-library` handles most Cover layout.
+
+The frontend adds responsive `background-size`, `background-position`, and padding for Groups (and Columns) that include a `background-image` in their inline style so sections read well on small screens. For full-bleed bands aligned to the viewport edge, use WordPress alignment (**Align full width** / `alignfull`) if your content uses it; you may need extra layout tweaks in SCSS depending on the page shell.
 
 ## Pantheon-managed `mu-plugins`
 

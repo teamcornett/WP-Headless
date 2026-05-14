@@ -77,4 +77,62 @@
     padding-left: v.$space-4;
     font-style: italic;
   }
+
+  // -------------------------------------------------------------------------
+  // Gutenberg → block → Advanced → Additional CSS class(es)
+  // Classes you add in the editor are output on the block wrapper in
+  // `content.rendered`; define matching rules here so the headless frontend
+  // matches patterns like https://untilyouownit.com/about
+  // -------------------------------------------------------------------------
+  .about-tag {
+    display: inline-block;
+    font-family: var(--font-barlow), Arial, Helvetica, sans-serif;
+    font-size: clamp(0.6875rem, 0.65rem + 0.2vw, 0.8125rem);
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    line-height: 1.3;
+    text-transform: uppercase;
+    color: #3764e5;
+    margin: 0 0 v.$space-3;
+  }
+
+  // Group / columns that use the editor background image (inline style from WP).
+  // Keeps cover-style behavior responsive when the saved HTML is minimal.
+  .wp-block-group[style*="background-image"],
+  .wp-block-columns[style*="background-image"] {
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    padding-block: clamp(2rem, 5vw, 4rem);
+    padding-inline: clamp(1rem, 3vw, 1.5rem);
+  }
+}
+
+.wp-block-columns.is-layout-flex {
+  gap: 1.5rem;
+
+  @media (min-width: v.$bp-md) {
+    gap: 2.5rem;
+  }
+}
+
+// ownit/fullbleed block (see wordpress-plugins/ownit-fullbleed): markup comes
+// from WP; styles must live here because the Next app does not enqueue the plugin.
+.wp-content .wp-block-ownit-fullbleed {
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  position: relative;
+  box-sizing: border-box;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.wp-content .wp-block-ownit-fullbleed__inner {
+  max-width: 1140px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 1.5rem);
 }

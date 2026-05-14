@@ -1,0 +1,12 @@
+/* Editor: make the section easy to select and see boundaries */
+.wp-block-ownit-fullbleed {
+	outline: 1px dashed rgba(0, 0, 0, 0.15);
+	outline-offset: 2px;
+}
+
+.ownit-fullbleed__media-buttons {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	align-items: center;
+}
