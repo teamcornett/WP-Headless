@@ -94,7 +94,7 @@ export async function getBusinessPages(): Promise<WordPressPage[]> {
   }
 
   return requestWordPressJSON<WordPressPage[]>(
-    "/wp/v2/pages?slug=about,be-counted,services,contact&_fields=id,slug,link,title,excerpt,content",
+    "/wp/v2/pages?slug=about,be-counted,owners,podcast,events,services,contact&_fields=id,slug,link,title,excerpt,content",
   );
 }
 
@@ -164,6 +164,45 @@ function getMockPages(): WordPressPage[] {
       content: {
         rendered:
           "<p>This page will load from WordPress when a published page with slug <code>be-counted</code> exists.</p>",
+      },
+      link: "#",
+    },
+    {
+      id: 2016,
+      slug: "owners",
+      title: { rendered: "Owners" },
+      excerpt: {
+        rendered: "Agency owners and leadership.",
+      },
+      content: {
+        rendered:
+          "<p>Create a published WordPress page with slug <code>owners</code> to replace this placeholder.</p>",
+      },
+      link: "#",
+    },
+    {
+      id: 2017,
+      slug: "podcast",
+      title: { rendered: "Podcast" },
+      excerpt: {
+        rendered: "Listen to episodes and updates.",
+      },
+      content: {
+        rendered:
+          "<p>Create a published WordPress page with slug <code>podcast</code> to replace this placeholder.</p>",
+      },
+      link: "#",
+    },
+    {
+      id: 2018,
+      slug: "events",
+      title: { rendered: "Events" },
+      excerpt: {
+        rendered: "Upcoming events and gatherings.",
+      },
+      content: {
+        rendered:
+          "<p>Create a published WordPress page with slug <code>events</code> to replace this placeholder.</p>",
       },
       link: "#",
     },

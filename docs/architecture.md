@@ -39,6 +39,9 @@ src/
     [slug]/page.tsx     # Catch-all dynamic WP pages
     about/page.tsx       # WP page slug "about"
     be-counted/page.tsx  # WP page slug "be-counted"
+    owners/page.tsx      # WP page slug "owners"
+    podcast/page.tsx     # WP page slug "podcast"
+    events/page.tsx      # WP page slug "events"
     services/page.tsx    # WP page slug "services"
     contact/page.tsx     # WP page slug "contact"
     globals.scss        # Tailwind layers + global styles

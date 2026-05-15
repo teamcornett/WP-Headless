@@ -56,6 +56,7 @@ Set both vars under **Vercel project → Settings → Environment Variables** fo
 | --- | --- | --- |
 | `NEXT_PUBLIC_WORDPRESS_URL` | Pantheon environment URL (see mapping below) | Inlined into the JS bundle at build time. **Changes require a rebuild.** |
 | `NEXT_PUBLIC_USE_MOCK_WP` | `false` | `true` would skip WP and serve hardcoded mock data. |
+| `MEGAPHONE_RSS_URL` | _(optional)_ | Megaphone RSS for `/podcast`. Defaults to `https://feeds.megaphone.fm/ownit` (Own It) if unset. Override for another show. |
 
 #### Recommended Pantheon → Vercel mapping
 

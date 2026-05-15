@@ -39,7 +39,7 @@ For everything else — accounts, the WordPress backend repo, deploy flows, cach
 
 ```
 src/
-  app/                 # App Router routes (page.tsx, [slug], about, be-counted, services, contact, layout)
+  app/                 # App Router routes (about, be-counted, owners, podcast, events, services, contact, [slug], layout)
   lib/wordpress.ts     # REST helpers, types, mock fallback
 public/                # Static assets
 docs/                  # Documentation (start with architecture.md)
@@ -55,6 +55,7 @@ Set in `.env.local` (locally) and in **Vercel → Settings → Environment Varia
 | --- | --- | --- |
 | `NEXT_PUBLIC_WORDPRESS_URL` | `https://dev-until-you-ownit.pantheonsite.io` | Base URL of the WordPress backend (no `/wp-json` — the app appends it). |
 | `NEXT_PUBLIC_USE_MOCK_WP` | `false` | When `true`, the app skips real WP requests and serves hardcoded mock data — useful when the backend is unreachable. |
+| `MEGAPHONE_RSS_URL` | _(optional)_ | Defaults to **Own It** at `https://feeds.megaphone.fm/ownit`. Set to override with another Megaphone RSS URL. |
 
 `NEXT_PUBLIC_*` vars are inlined at build time, so changing them on Vercel requires a redeploy. Details in [docs/deployment.md](docs/deployment.md).
 

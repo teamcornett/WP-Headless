@@ -1,0 +1,155 @@
+@use "../../styles/variables" as v;
+
+.episodes {
+  margin-top: v.$space-12;
+  padding-top: v.$space-6;
+  border-top: 1px solid v.$color-border-light;
+}
+
+.episodesTitle {
+  font-family: var(--font-bebas-neue), Arial, Helvetica, sans-serif;
+  font-size: 2.25rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+  color: #212529;
+  margin: 0 0 v.$space-5;
+}
+
+.feedMissing {
+  color: #000000;
+  font-weight: 500;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.code {
+  font-size: 0.9em;
+  background: rgb(245 245 245);
+  padding: 0.15em 0.4em;
+  border-radius: v.$radius-md;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-5;
+}
+
+.card {
+  margin: 0;
+  border: 1px solid v.$color-border-light;
+  border-radius: v.$radius-lg;
+  overflow: hidden;
+  background: #fff;
+}
+
+.cardBody {
+  display: flex;
+  gap: v.$space-4;
+  padding: v.$space-5;
+  align-items: flex-start;
+}
+
+.artwork {
+  flex-shrink: 0;
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: v.$radius-md;
+}
+
+.cardText {
+  flex: 1;
+  min-width: 0;
+}
+
+.episodeTitle {
+  font-family: var(--font-barlow), Arial, Helvetica, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 v.$space-2;
+  line-height: 1.3;
+}
+
+.episodeLink {
+  color: #3764e5;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+}
+
+.date {
+  display: block;
+  font-size: 0.875rem;
+  color: rgb(82 82 82);
+  margin-bottom: v.$space-3;
+}
+
+.description {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #000000;
+  line-height: 1.55;
+  margin: 0 0 v.$space-4;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.player {
+  width: 100%;
+  max-width: 100%;
+  height: 40px;
+  margin-top: v.$space-2;
+}
+
+.pagination {
+  margin-top: v.$space-6;
+  padding-top: v.$space-6;
+  border-top: 1px solid v.$color-border-light;
+}
+
+.paginationSummary {
+  margin: 0 0 v.$space-4;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: rgb(82 82 82);
+  text-align: center;
+}
+
+.paginationControls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: v.$space-4;
+}
+
+.paginationLink {
+  font-weight: 600;
+  color: #3764e5;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+}
+
+.paginationDisabled {
+  color: rgb(163 163 163);
+  font-weight: 600;
+}
+
+.paginationCurrent {
+  font-weight: 500;
+  color: #000000;
+}

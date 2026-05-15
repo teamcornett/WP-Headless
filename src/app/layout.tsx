@@ -61,7 +61,7 @@ export default function RootLayout({
                   priority
                 />
               </Link>
-              <nav className="flex items-center gap-5 text-lg font-bold uppercase text-black">
+              <nav className="flex flex-wrap items-center justify-end gap-x-5 gap-y-2 text-lg font-bold uppercase text-black">
                 <Link href="/" className="hover:underline underline-offset-4">
                   Home
                 </Link>
@@ -78,16 +78,22 @@ export default function RootLayout({
                   Be Counted
                 </Link>
                 <Link
-                  href="/services"
+                  href="/owners"
                   className="hover:underline underline-offset-4"
                 >
-                  Services
+                  Owners
                 </Link>
                 <Link
-                  href="/contact"
+                  href="/podcast"
                   className="hover:underline underline-offset-4"
                 >
-                  Contact
+                  Podcast
+                </Link>
+                <Link
+                  href="/events"
+                  className="hover:underline underline-offset-4"
+                >
+                  Events
                 </Link>
               </nav>
             </div>
