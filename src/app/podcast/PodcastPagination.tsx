@@ -1,58 +1,60 @@
 import Link from "next/link";
-import { MEGAPHONE_EPISODES_PER_PAGE } from "@/lib/megaphone";
 import styles from "./podcast.module.scss";
 
 type Props = {
   page: number;
   totalPages: number;
-  total: number;
 };
 
 function pageHref(page: number): string {
   return page <= 1 ? "/podcast" : `/podcast?page=${page}`;
 }
 
-export default function PodcastPagination({ page, totalPages, total }: Props) {
+function buildPaginationItems(current: number, total: number): (number | "ellipsis")[] {
+  if (total <= 7) {
+    return Array.from({ length: total }, (_, i) => i + 1);
+  }
+
+  const items: (number | "ellipsis")[] = [1];
+  const start = Math.max(2, current - 1);
+  const end = Math.min(total - 1, current + 1);
+
+  if (start > 2) items.push("ellipsis");
+  for (let i = start; i <= end; i++) items.push(i);
+  if (end < total - 1) items.push("ellipsis");
+  items.push(total);
+
+  return items;
+}
+
+export default function PodcastPagination({ page, totalPages }: Props) {
   if (totalPages <= 1) {
     return null;
   }
 
-  const hasNewer = page > 1;
-  const hasOlder = page < totalPages;
-  const rangeStart = (page - 1) * MEGAPHONE_EPISODES_PER_PAGE + 1;
-  const rangeEnd = Math.min(page * MEGAPHONE_EPISODES_PER_PAGE, total);
+  const items = buildPaginationItems(page, totalPages);
 
   return (
-    <nav
-      className={styles.pagination}
-      aria-label="Podcast episodes pagination"
-    >
-      <p className={styles.paginationSummary}>
-        Showing {rangeStart}–{rangeEnd} of {total} episodes
-      </p>
-      <div className={styles.paginationControls}>
-        {hasNewer ? (
-          <Link href={pageHref(page - 1)} className={styles.paginationLink}>
-            ← Newer
-          </Link>
-        ) : (
-          <span className={styles.paginationDisabled} aria-hidden="true">
-            ← Newer
-          </span>
-        )}
-        <span className={styles.paginationCurrent}>
-          Page {page} of {totalPages}
-        </span>
-        {hasOlder ? (
-          <Link href={pageHref(page + 1)} className={styles.paginationLink}>
-            Older →
-          </Link>
-        ) : (
-          <span className={styles.paginationDisabled} aria-hidden="true">
-            Older →
-          </span>
-        )}
-      </div>
+    <nav className={styles.pagination} aria-label="Podcast episodes pagination">
+      <ul className={styles.paginationList}>
+        {items.map((item, index) => (
+          <li key={`${item}-${index}`} className={styles.paginationItem}>
+            {item === "ellipsis" ? (
+              <span className={styles.paginationEllipsis} aria-hidden="true">
+                …
+              </span>
+            ) : item === page ? (
+              <span className={styles.paginationCurrent} aria-current="page">
+                {item}
+              </span>
+            ) : (
+              <Link href={pageHref(item)} className={styles.paginationLink}>
+                {item}
+              </Link>
+            )}
+          </li>
+        ))}
+      </ul>
     </nav>
   );
 }

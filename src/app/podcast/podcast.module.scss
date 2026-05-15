@@ -1,155 +1,451 @@
 @use "../../styles/variables" as v;
 
-.episodes {
-  margin-top: v.$space-12;
-  padding-top: v.$space-6;
-  border-top: 1px solid v.$color-border-light;
+$page-max: 1140px;
+
+.page {
+  margin: 0 auto;
+  max-width: $page-max;
+  padding: v.$space-6 v.$space-6 v.$space-12;
 }
 
-.episodesTitle {
+// —— Hero (reference: untilyouownit.com/podcast) ——
+.hero {
+  display: grid;
+  gap: v.$space-6;
+  align-items: center;
+  margin-bottom: v.$space-12;
+  text-align: center;
+
+  @media (min-width: v.$bp-md) {
+    grid-template-columns: auto 1fr;
+    text-align: left;
+    gap: v.$space-12;
+  }
+}
+
+.heroVisual {
+  position: relative;
+  width: 11rem;
+  height: 11rem;
+  margin: 0 auto;
+
+  @media (min-width: v.$bp-md) {
+    margin: 0;
+    width: 13rem;
+    height: 13rem;
+  }
+}
+
+.heroArt {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid v.$color-brand-yellow;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.12);
+}
+
+.heroRing {
+  position: absolute;
+  inset: -0.5rem;
+  border: 2px dashed rgb(55 100 229 / 0.35);
+  border-radius: 50%;
+  animation: podcast-ring-spin 24s linear infinite;
+  font-size: 0;
+}
+
+@keyframes podcast-ring-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.heroContent {
+  min-width: 0;
+}
+
+.heroEyebrow {
   font-family: var(--font-bebas-neue), Arial, Helvetica, sans-serif;
-  font-size: 2.25rem;
-  font-weight: 400;
+  font-size: 1.25rem;
+  letter-spacing: 0.2em;
+  color: #3764e5;
+  margin: 0 0 v.$space-3;
+}
+
+.heroTitle {
+  font-family: var(--font-bebas-neue), Arial, Helvetica, sans-serif;
+  font-size: clamp(2.5rem, 6vw, 3.75rem);
+  line-height: 1;
+  color: #3764e5;
+  margin: 0 0 v.$space-4;
   letter-spacing: 0.02em;
-  line-height: 1.1;
-  color: #212529;
+}
+
+.heroIntro {
   margin: 0 0 v.$space-5;
+  max-width: 40rem;
+
+  @media (min-width: v.$bp-md) {
+    margin-left: 0;
+    margin-right: auto;
+  }
 }
 
-.feedMissing {
-  color: #000000;
-  font-weight: 500;
-  line-height: 1.6;
-  margin: 0;
+.subscribeRow {
+  margin-top: v.$space-2;
 }
 
-.code {
-  font-size: 0.9em;
-  background: rgb(245 245 245);
-  padding: 0.15em 0.4em;
-  border-radius: v.$radius-md;
+.subscribeLabel {
+  font-family: var(--font-bebas-neue), Arial, Helvetica, sans-serif;
+  font-size: 1.125rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #212529;
+  margin: 0 0 v.$space-3;
 }
 
-.list {
+.subscribeList {
   list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
-  flex-direction: column;
-  gap: v.$space-5;
+  flex-wrap: wrap;
+  gap: v.$space-3;
+  align-items: center;
 }
 
-.card {
-  margin: 0;
-  border: 1px solid v.$color-border-light;
-  border-radius: v.$radius-lg;
-  overflow: hidden;
-  background: #fff;
-}
-
-.cardBody {
+.subscribeIconLink {
   display: flex;
-  gap: v.$space-4;
-  padding: v.$space-5;
-  align-items: flex-start;
-}
-
-.artwork {
-  flex-shrink: 0;
-  width: 80px;
-  height: 80px;
-  object-fit: cover;
-  border-radius: v.$radius-md;
-}
-
-.cardText {
-  flex: 1;
-  min-width: 0;
-}
-
-.episodeTitle {
-  font-family: var(--font-barlow), Arial, Helvetica, sans-serif;
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin: 0 0 v.$space-2;
-  line-height: 1.3;
-}
-
-.episodeLink {
-  color: #3764e5;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  background: #3764e5;
+  color: #fff;
   text-decoration: none;
+  transition:
+    background-color 0.15s ease,
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
 
   &:hover {
-    text-decoration: underline;
-    text-underline-offset: 3px;
+    background: #2a4fb8;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgb(55 100 229 / 0.35);
+  }
+
+  &:focus-visible {
+    outline: 2px solid v.$color-brand-yellow;
+    outline-offset: 3px;
   }
 }
 
-.date {
+.subscribeIcon {
+  width: 1.35rem;
+  height: 1.35rem;
+}
+
+// —— Section titles (featured + episodes) ——
+.sectionTitle {
+  font-family: var(--font-bebas-neue), Arial, Helvetica, sans-serif;
+  font-size: 4rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 4rem;
+  color: #212529;
+  margin: 0 0 v.$space-5;
+  padding-bottom: 0;
+  text-align: left;
+
+  &::before {
+    display: none;
+    content: none;
+  }
+}
+
+// —— Featured episode ——
+.featured {
+  margin-bottom: v.$space-12;
+}
+
+.featuredCard {
+  display: grid;
+  gap: v.$space-6;
+  background: #fff;
+  border-radius: v.$radius-lg;
+  box-shadow: 0 10px 30px rgb(0 0 0 / 0.08);
+  overflow: hidden;
+  border: 1px solid v.$color-border-light;
+
+  @media (min-width: v.$bp-md) {
+    grid-template-columns: minmax(12rem, 280px) 1fr;
+    align-items: start;
+  }
+}
+
+.featuredImage,
+.featuredImagePlaceholder {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  display: block;
+}
+
+.featuredImagePlaceholder {
+  background: linear-gradient(135deg, #3764e5 0%, v.$color-brand-yellow 100%);
+}
+
+.featuredBody {
+  padding: v.$space-5 v.$space-5 v.$space-6;
+
+  @media (min-width: v.$bp-md) {
+    padding: v.$space-6 v.$space-6 v.$space-6 0;
+  }
+}
+
+.featuredTitle {
+  font-family: var(--font-barlow), Arial, Helvetica, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.25;
+  margin: 0 0 v.$space-2;
+  color: #000;
+}
+
+.featuredDate {
   display: block;
   font-size: 0.875rem;
-  color: rgb(82 82 82);
+  color: v.$color-text-muted-light;
   margin-bottom: v.$space-3;
 }
 
-.description {
-  font-size: 1rem;
+.featuredDescription {
   font-weight: 500;
-  color: #000000;
   line-height: 1.55;
+  color: #000;
   margin: 0 0 v.$space-4;
   display: -webkit-box;
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-.player {
+.featuredPlayer {
   width: 100%;
   max-width: 100%;
-  height: 40px;
-  margin-top: v.$space-2;
+  height: 44px;
 }
 
-.pagination {
-  margin-top: v.$space-6;
-  padding-top: v.$space-6;
-  border-top: 1px solid v.$color-border-light;
+// —— Episode grid (CodePen card grid pattern) ——
+.episodes {
+  margin-bottom: v.$space-6;
 }
 
-.paginationSummary {
-  margin: 0 0 v.$space-4;
-  font-size: 0.9375rem;
-  font-weight: 500;
-  color: rgb(82 82 82);
-  text-align: center;
-}
-
-.paginationControls {
+.grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   display: flex;
   flex-wrap: wrap;
+  margin-left: -0.25rem;
+  margin-right: -0.25rem;
+}
+
+.gridItem {
+  width: 100%;
+  padding: 0.25rem;
+  margin-bottom: v.$space-4;
+
+  @media (min-width: v.$bp-md) {
+    width: 50%;
+  }
+
+  @media (min-width: 1024px) {
+    width: 33.333%;
+    padding: 0.5rem;
+    margin-bottom: v.$space-5;
+  }
+}
+
+.card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: v.$radius-lg;
+  background: #fff;
+  box-shadow: 0 4px 14px rgb(0 0 0 / 0.08);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 12px 28px rgb(0 0 0 / 0.12);
+    transform: translateY(-2px);
+  }
+}
+
+.cardMedia {
+  overflow: hidden;
+}
+
+.cardImage,
+.cardImagePlaceholder {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.cardImagePlaceholder {
+  background: linear-gradient(160deg, #e8e8e8, #f5f5f5);
+}
+
+.cardHeader {
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-2;
+  padding: v.$space-4 v.$space-4 v.$space-2;
+  flex: 1;
+}
+
+.cardTitle {
+  font-family: var(--font-barlow), Arial, Helvetica, sans-serif;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: 1.3;
+  margin: 0;
+  color: #000;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.cardDate {
+  font-size: 0.8125rem;
+  color: v.$color-text-muted-light;
+  white-space: nowrap;
+}
+
+.cardFooter {
+  padding: 0 v.$space-4 v.$space-4;
+}
+
+.cardPlayer {
+  width: 100%;
+  height: 36px;
+}
+
+// —— Numbered pagination ——
+.pagination {
+  margin: v.$space-6 0 v.$space-12;
+}
+
+.paginationList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: v.$space-2;
+}
+
+.paginationItem {
+  display: flex;
+  align-items: center;
+}
+
+.paginationLink,
+.paginationCurrent,
+.paginationEllipsis {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: v.$space-4;
+  min-width: 2.25rem;
+  height: 2.25rem;
+  padding: 0 0.5rem;
+  font-weight: 600;
+  font-size: 1rem;
 }
 
 .paginationLink {
-  font-weight: 600;
   color: #3764e5;
   text-decoration: none;
+  border-radius: v.$radius-md;
+  border: 1px solid transparent;
 
   &:hover {
+    background: rgb(55 100 229 / 0.08);
     text-decoration: underline;
     text-underline-offset: 3px;
   }
 }
 
-.paginationDisabled {
-  color: rgb(163 163 163);
-  font-weight: 600;
+.paginationCurrent {
+  color: #000;
+  background: v.$color-brand-yellow;
+  border-radius: v.$radius-md;
 }
 
-.paginationCurrent {
+.paginationEllipsis {
+  color: v.$color-text-muted-light;
   font-weight: 500;
-  color: #000000;
+}
+
+// —— Bottom CTA ——
+.cta {
+  margin-top: v.$space-12;
+  padding: v.$space-12 v.$space-6;
+  text-align: center;
+  background: #3764e5;
+  color: #fff;
+  border-radius: v.$radius-lg;
+}
+
+.ctaTitle {
+  font-family: var(--font-bebas-neue), Arial, Helvetica, sans-serif;
+  font-size: 4rem;
+  line-height: 4rem;
+  color: #fff;
+  margin: 0 0 v.$space-3;
+  padding-bottom: 0;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+
+  &::before {
+    display: none;
+    content: none;
+  }
+}
+
+.ctaSubtitle {
+  font-size: 1.125rem;
+  font-weight: 500;
+  margin: 0 0 v.$space-5;
+  opacity: 0.95;
+}
+
+.ctaButton {
+  display: inline-block;
+  padding: 0.75rem 1.75rem;
+  background: v.$color-brand-yellow;
+  color: #000;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  border-radius: v.$radius-md;
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background: v.$color-brand-yellow-hover;
+  }
+}
+
+.feedMissing {
+  text-align: center;
+  font-weight: 500;
+  color: #000;
+  padding: v.$space-12 0;
 }

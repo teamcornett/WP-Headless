@@ -5,9 +5,12 @@ import {
   getMegaphoneEpisodesPage,
   DEFAULT_MEGAPHONE_RSS_URL,
 } from "@/lib/megaphone";
-import aboutStyles from "../about/about.module.scss";
-import PodcastEpisodeList from "./PodcastEpisodeList";
+import PodcastHero from "./PodcastHero";
+import PodcastFeatured from "./PodcastFeatured";
+import PodcastEpisodeGrid from "./PodcastEpisodeGrid";
 import PodcastPagination from "./PodcastPagination";
+import PodcastCta from "./PodcastCta";
+import styles from "./podcast.module.scss";
 
 const rssUrl =
   process.env.MEGAPHONE_RSS_URL?.trim() || DEFAULT_MEGAPHONE_RSS_URL;
@@ -27,7 +30,7 @@ export async function generateMetadata(): Promise<Metadata> {
     return { title: "Podcast" };
   }
   const raw = page.title.rendered.replace(/<[^>]+>/g, "").trim();
-  return { title: `${raw} | Headless WordPress Site` };
+  return { title: `${raw} | Own It` };
 }
 
 export default async function PodcastPage({ searchParams }: PodcastPageProps) {
@@ -39,25 +42,37 @@ export default async function PodcastPage({ searchParams }: PodcastPageProps) {
 
   const { page: pageParam } = await searchParams;
   const requestedPage = parsePageParam(pageParam);
-  const { episodes, page: currentPage, total, totalPages } =
-    await getMegaphoneEpisodesPage(rssUrl, requestedPage);
+  const feed = await getMegaphoneEpisodesPage(rssUrl, requestedPage);
+
+  const hasEpisodes =
+    feed.episodes.length > 0 || feed.featuredEpisode !== null;
 
   return (
-    <main className={aboutStyles.main}>
-      <h1
-        className={aboutStyles.title}
-        dangerouslySetInnerHTML={{ __html: page.title.rendered }}
+    <main className={styles.page}>
+      <PodcastHero
+        channel={feed.channel}
+        pageTitle={page.title.rendered}
+        introHtml={page.content.rendered}
       />
-      <div
-        className={`${aboutStyles.content} wp-content`}
-        dangerouslySetInnerHTML={{ __html: page.content.rendered }}
-      />
-      <PodcastEpisodeList episodes={episodes} />
-      <PodcastPagination
-        page={currentPage}
-        totalPages={totalPages}
-        total={total}
-      />
+
+      {!hasEpisodes ? (
+        <p className={styles.feedMissing}>
+          No episodes could be loaded from the Megaphone feed. Try again later.
+        </p>
+      ) : (
+        <>
+          {feed.featuredEpisode ? (
+            <PodcastFeatured episode={feed.featuredEpisode} />
+          ) : null}
+          <PodcastEpisodeGrid episodes={feed.episodes} />
+          <PodcastPagination
+            page={feed.page}
+            totalPages={feed.totalPages}
+          />
+        </>
+      )}
+
+      <PodcastCta />
     </main>
   );
 }
