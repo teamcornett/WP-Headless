@@ -12,8 +12,8 @@ Ask whoever's onboarding you to confirm or set up the following before you start
 
 | Service | What you need | Where it's used |
 | --- | --- | --- |
-| GitHub | Read/write on [`therealboone/WP-Headless`](https://github.com/therealboone/WP-Headless) (deploy repo). Optional access to [`teamcornett/headlesswordpress`](https://github.com/teamcornett/headlesswordpress) mirror. | All frontend code changes |
-| Vercel | Member of the Vercel project owning `therealboone/WP-Headless` | Reviewing deploys, env vars, domains |
+| GitHub | Read/write on [`teamcornett/WP-Headless`](https://github.com/teamcornett/WP-Headless) | All frontend code changes |
+| Vercel | Member of the Vercel project connected to `teamcornett/WP-Headless` | Reviewing deploys, env vars, domains |
 | Pantheon | Team member on the `until-you-ownit` site | WP admin, code commits, cache clears |
 | Pantheon SSH key | Your public key uploaded under **Pantheon → Account → SSH Keys** | Cloning/pushing the WordPress git repo |
 | WordPress admin | A WP user with at least **Editor** role on Pantheon Dev (Admin if you'll install plugins) | Content + plugin work |
@@ -38,23 +38,22 @@ Install once:
 
 ```bash
 cd ~/Documents          # or wherever you keep work
-git clone https://github.com/therealboone/WP-Headless.git Headless
+git clone https://github.com/teamcornett/WP-Headless.git Headless
 cd Headless
-```
-
-Add the team mirror as a second remote so you can keep it in sync:
-
-```bash
-git remote add teamcornett https://github.com/teamcornett/headlesswordpress.git
-git fetch teamcornett
 git remote -v
 ```
 
 Expected output:
 
 ```
-origin       https://github.com/therealboone/WP-Headless.git (fetch / push)
-teamcornett  https://github.com/teamcornett/headlesswordpress.git (fetch / push)
+origin  https://github.com/teamcornett/WP-Headless.git (fetch / push)
+```
+
+If you cloned before the org transfer, repoint `origin` and remove the old mirror remote:
+
+```bash
+git remote set-url origin https://github.com/teamcornett/WP-Headless.git
+git remote remove teamcornett 2>/dev/null || true
 ```
 
 ## 3. Install dependencies
@@ -172,11 +171,10 @@ Once you're set up, the daily loop is:
 1. `git checkout main && git pull origin main`
 2. `git checkout -b feat/your-feature` (or `fix/...`, `chore/...`)
 3. Develop, commit, repeat.
-4. `git push -u origin feat/your-feature && git push teamcornett feat/your-feature`
-5. Open a PR into `main` on `therealboone/WP-Headless`.
+4. `git push -u origin feat/your-feature`
+5. Open a PR into `main` on `teamcornett/WP-Headless`.
 6. Verify the Vercel Preview the bot posts on the PR.
 7. Merge → Vercel Production deploys automatically.
-8. After merge, sync `main` to the mirror: `git checkout main && git pull origin main && git push teamcornett main`.
 
 See [`CONTRIBUTING.md`](../CONTRIBUTING.md) for branch naming, commit style, and PR expectations.
 

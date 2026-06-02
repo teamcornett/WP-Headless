@@ -2,12 +2,12 @@
 
 This stack has two independent deploy pipelines:
 
-- **Frontend (Next.js)** → Vercel, triggered by git pushes to `therealboone/WP-Headless`.
+- **Frontend (Next.js)** → Vercel, triggered by git pushes to `teamcornett/WP-Headless`.
 - **Backend (WordPress)** → Pantheon, triggered by `git push` to the Pantheon code server.
 
 ## Frontend deploys (Vercel)
 
-Vercel is connected to **`therealboone/WP-Headless`**. Pushes to that repo (only) trigger builds.
+Vercel is connected to **`teamcornett/WP-Headless`**. Pushes to that repo trigger builds.
 
 | Action | Result |
 | --- | --- |
@@ -28,24 +28,19 @@ git checkout -b feat/<short-name>
 npm run lint
 git add . && git commit -m "feat: <summary>"
 
-# push to deploy repo (Vercel triggers Preview)
+# push (Vercel triggers Preview)
 git push -u origin feat/<short-name>
-
-# mirror to team repo (no Vercel effect, just team visibility)
-git push teamcornett feat/<short-name>
 ```
 
-Open a PR into `main` on `therealboone/WP-Headless`. The Vercel bot comments with a Preview URL within ~1–2 minutes. Verify on Preview → merge → Production deploys automatically.
+Open a PR into `main` on `teamcornett/WP-Headless`. The Vercel bot comments with a Preview URL within ~1–2 minutes. Verify on Preview → merge → Production deploys automatically.
 
-After merge, sync `main` to the mirror so both `main`s match:
+After merge, clean up the feature branch:
 
 ```bash
 git checkout main
 git pull origin main
-git push teamcornett main
 git branch -d feat/<short-name>
 git push origin --delete feat/<short-name>
-git push teamcornett --delete feat/<short-name>
 ```
 
 ### Environment variables (Vercel)
@@ -133,10 +128,9 @@ Putting it together, here's what a full release looks like when both backend and
 
 ### Frontend-only release
 
-1. Branch off `main` of `therealboone/WP-Headless`, push, open PR.
+1. Branch off `main` of `teamcornett/WP-Headless`, push, open PR.
 2. Verify the Vercel Preview comment on the PR.
 3. Merge → Vercel Production deploys.
-4. Sync `main` to the `teamcornett` mirror.
 
 ### Coordinated release (frontend depends on new WP content / fields)
 

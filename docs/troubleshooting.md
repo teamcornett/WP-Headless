@@ -47,7 +47,7 @@ Also, on the Production URL, open DevTools → **Network** → filter `wp-json`.
 
 Most likely Vercel is connected to the **wrong** GitHub repo. Verify:
 
-- **Vercel → Settings → Git** → "Connected Git Repository" should read `therealboone/WP-Headless`.
+- **Vercel → Settings → Git** → "Connected Git Repository" should read `teamcornett/WP-Headless`.
 - If it shows a different repo, push to that repo instead — or repoint Vercel here.
 
 If the repo is correct but pushes still don't trigger builds:
@@ -135,12 +135,16 @@ The slug or path doesn't exist, or permalinks are misconfigured. In WP Admin →
 
 ## Git remote issues
 
-### `git push teamcornett ...` fails with 403 / authentication error
+### `git push` fails with 403 / authentication error
 
-You don't have write access to `teamcornett/headlesswordpress`. That's fine — you don't need it for Vercel deploys (those go through `origin`/`therealboone`). Either:
+Confirm `origin` points at the team repo and you have write access:
 
-- Skip pushing to `teamcornett` and rely on `origin` for the day-to-day workflow.
-- Ask the project owner to invite you to the `teamcornett` org.
+```bash
+git remote -v
+# should show https://github.com/teamcornett/WP-Headless.git
+```
+
+If it still shows `therealboone/WP-Headless`, run `git remote set-url origin https://github.com/teamcornett/WP-Headless.git`. Ask a `teamcornett` org admin to invite you if access is missing.
 
 ### Local branch is `feat/...` but I want to swap to a clean `main`
 

@@ -4,7 +4,7 @@ This project is a **headless WordPress + Next.js** stack split across two manage
 
 | Layer | Code repository | Hosting |
 | --- | --- | --- |
-| Frontend (Next.js App Router) | [`therealboone/WP-Headless`](https://github.com/therealboone/WP-Headless) (deploy repo, mirrored to [`teamcornett/headlesswordpress`](https://github.com/teamcornett/headlesswordpress)) | Vercel |
+| Frontend (Next.js App Router) | [`teamcornett/WP-Headless`](https://github.com/teamcornett/WP-Headless) | Vercel |
 | Backend (WordPress) | Pantheon Git (`until-you-ownit`) | Pantheon (Dev / Test / Live) |
 
 ## Request flow
@@ -76,25 +76,25 @@ Pantheon ships a default WordPress upstream; we add custom plugins/themes throug
 | WordPress code (themes, plugins, mu-plugins) | Pantheon git repo (`master`) |
 | WordPress content (pages, posts, options) | Pantheon environment database (Dev/Test/Live each have their own) |
 | Uploaded media | Pantheon environment files (separate per env) |
-| Frontend code | `therealboone/WP-Headless` GitHub `main` |
+| Frontend code | `teamcornett/WP-Headless` GitHub `main` |
 | Frontend env vars | Vercel project settings (Production / Preview / Development scopes) |
 | Local dev env vars | `.env.local` (gitignored) |
 
-## Two GitHub repos
+## GitHub repo
 
-Vercel watches **`therealboone/WP-Headless`**. Pushes there trigger Preview (any branch) and Production (`main`) builds.
-
-**`teamcornett/headlesswordpress`** is a mirror kept in sync for team visibility — Vercel does **not** read from it.
-
-In your local clone, both are configured as git remotes:
+Vercel watches **`teamcornett/WP-Headless`**. Pushes to `origin` trigger Preview (any branch) and Production (`main`) builds.
 
 ```bash
 $ git remote -v
-origin       https://github.com/therealboone/WP-Headless.git (fetch / push)
-teamcornett  https://github.com/teamcornett/headlesswordpress.git (fetch / push)
+origin  https://github.com/teamcornett/WP-Headless.git (fetch / push)
 ```
 
-When you push a feature branch you typically push to both: `origin` triggers Vercel Preview; `teamcornett` keeps the mirror current. After PR merge, `main` should be re-pushed to `teamcornett` so both `main`s match.
+If your local clone still points at the old personal repo (`therealboone/WP-Headless`), repoint `origin`:
+
+```bash
+git remote set-url origin https://github.com/teamcornett/WP-Headless.git
+git remote remove teamcornett 2>/dev/null || true
+```
 
 ## Caching layers (top to bottom)
 

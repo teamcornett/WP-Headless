@@ -6,7 +6,7 @@ Frontend for a headless WordPress business website. Built with Next.js (App Rout
 
 | Layer | Code | Hosting |
 | --- | --- | --- |
-| Frontend (Next.js App Router) | [`therealboone/WP-Headless`](https://github.com/therealboone/WP-Headless) (deploy repo) · mirrored to [`teamcornett/headlesswordpress`](https://github.com/teamcornett/headlesswordpress) | Vercel |
+| Frontend (Next.js App Router) | [`teamcornett/WP-Headless`](https://github.com/teamcornett/WP-Headless) | Vercel |
 | Backend (WordPress) | Pantheon Git (`until-you-ownit`) | Pantheon (Dev / Test / Live) |
 
 Vercel pulls posts and pages from Pantheon over the WordPress REST API. See [docs/architecture.md](docs/architecture.md).
@@ -14,7 +14,7 @@ Vercel pulls posts and pages from Pantheon over the WordPress REST API. See [doc
 ## Quick start (frontend)
 
 ```bash
-git clone https://github.com/therealboone/WP-Headless.git Headless
+git clone https://github.com/teamcornett/WP-Headless.git Headless
 cd Headless
 npm install
 cp .env.example .env.local
@@ -65,9 +65,8 @@ Set in `.env.local` (locally) and in **Vercel → Settings → Environment Varia
 2. `git checkout -b feat/<short-name>`
 3. Edit, commit, run `npm run lint`.
 4. `git push -u origin feat/<short-name>` (Vercel builds a Preview).
-5. Open a PR into `main` on `therealboone/WP-Headless`.
+5. Open a PR into `main` on `teamcornett/WP-Headless`.
 6. Verify the Vercel Preview URL the bot posts on the PR.
 7. Merge → Vercel Production deploys automatically.
-8. Sync `main` to the team mirror: `git push teamcornett main`.
 
 Branch naming and commit style are documented in [CONTRIBUTING.md](CONTRIBUTING.md).
