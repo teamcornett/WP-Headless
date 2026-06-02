@@ -9,6 +9,8 @@ This stack has two independent deploy pipelines:
 
 Vercel is connected to **`teamcornett/WP-Headless`**. Pushes to that repo trigger builds.
 
+**Smoke-test after connecting Git or changing env vars:** open the Vercel Preview on a PR, confirm `/` and `/podcast` load; merge to `main` and repeat on Production. Pantheon content-only edits do not require a frontend deploy (see [caching.md](./caching.md)).
+
 | Action | Result |
 | --- | --- |
 | Push any branch to `origin` | Vercel builds a **Preview** deployment with a unique URL |
