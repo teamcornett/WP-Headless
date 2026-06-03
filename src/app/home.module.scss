@@ -15,8 +15,7 @@
   margin: 0;
   padding: 0;
 
-  // Editors control the hero in blocks; hide the default page-title H1 from Gutenberg.
-  :global(h1:first-of-type),
+  // Editors control the hero in blocks; hide WP post-title block if present.
   :global(.wp-block-post-title) {
     display: none;
   }

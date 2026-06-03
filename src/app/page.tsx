@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getHomePage, getHomePageSlug } from "@/lib/wordpress";
+import { wrapSecondaryTextHeadings } from "@/lib/wordpress-html";
 import styles from "./home.module.scss";
 
 function stripTags(value: string): string {
@@ -53,7 +54,9 @@ export default async function Home() {
     <main className={styles.main}>
       <div
         className={`${styles.content} wp-content`}
-        dangerouslySetInnerHTML={{ __html: page.content.rendered }}
+        dangerouslySetInnerHTML={{
+          __html: wrapSecondaryTextHeadings(page.content.rendered),
+        }}
       />
     </main>
   );

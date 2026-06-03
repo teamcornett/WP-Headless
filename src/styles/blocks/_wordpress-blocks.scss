@@ -96,6 +96,51 @@
     margin: 0 0 v.$space-3;
   }
 
+  // Homepage hero — pink column image (editor class on column wrapper).
+  .wp-block-column.background-pink {
+    .wp-block-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 0;
+    }
+  }
+
+  // Homepage — secondary headline box (wrapper injected in page.tsx).
+  .secondary-text-wrap {
+    padding: 3rem !important;
+    background-color: #edcdbf;
+
+    .wp-block-heading.secondary-text {
+      margin: 0;
+    }
+  }
+
+  // Homepage CTA — yellow button link (editor class on <a>).
+  a.background-yellow,
+  .background-yellow.button {
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem 0.5rem;
+    text-transform: uppercase;
+    line-height: 1;
+    color: #000;
+    text-decoration: none;
+    font-weight: 700;
+    display: inline-block;
+    font-family: var(--font-bebas-neue), Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    transition: all 0.5s;
+    border: 3px solid #efd941;
+    background-color: #efd941;
+
+    &:hover,
+    &:focus {
+      color: #000;
+      text-decoration: none;
+      filter: brightness(0.97);
+    }
+  }
+
   // Group / columns that use the editor background image (inline style from WP).
   // Keeps cover-style behavior responsive when the saved HTML is minimal.
   .wp-block-group[style*="background-image"],
