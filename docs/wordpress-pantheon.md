@@ -111,6 +111,7 @@ The Next.js frontend has hardcoded routes that read specific WP page slugs. Crea
 
 | Frontend route | WP page slug | Title (suggested) |
 | --- | --- | --- |
+| `/` (homepage) | `home` | Home |
 | `/about` | `about` | About |
 | `/be-counted` | `be-counted` | Be Counted |
 | `/owners` | `owners` | Owners |
@@ -121,12 +122,14 @@ The Next.js frontend has hardcoded routes that read specific WP page slugs. Crea
 
 The slug is in the right sidebar under **Page → URL** when editing. It's lowercase, no spaces. If a slug doesn't match, the frontend route renders Next.js's 404 page.
 
+The homepage is a normal WordPress **Page** — build it entirely in Gutenberg (blocks, patterns, custom classes). Pantheon **Settings → Reading → "Your homepage displays"** does not control the headless frontend; only the page slug (`home` by default) matters. Override the slug with `NEXT_PUBLIC_HOME_PAGE_SLUG` in Vercel / `.env.local` if needed.
+
 Other pages you create can be reached via `/[slug]` — see [`src/app/[slug]/page.tsx`](../src/app/[slug]/page.tsx).
 
 ## Authoring content
 
-- **Posts** appear on the homepage's "Latest posts" grid.
-- **Pages** are reachable via their slug under `/[slug]`.
+- **Pages** power the homepage (`/`, slug `home`) and routes like `/about`, `/podcast`, etc.
+- **Posts** are available via REST but are not rendered on the homepage unless you add them in Gutenberg (e.g. Latest Posts block).
 - WordPress publishes immediately by default. Drafts and scheduled posts are not exposed by REST until they're `publish` status.
 - Featured images and media are returned by REST when the frontend asks for them. Today the frontend doesn't render featured images — adding that is a frontend change.
 

@@ -1,56 +1,60 @@
-import { getRecentPosts } from "@/lib/wordpress";
+import type { Metadata } from "next";
+import { getHomePage, getHomePageSlug } from "@/lib/wordpress";
 import styles from "./home.module.scss";
 
-export default async function Home() {
-  let posts: Awaited<ReturnType<typeof getRecentPosts>> = [];
-  let errorMessage = "";
+function stripTags(value: string): string {
+  return value.replace(/<[^>]+>/g, "").trim();
+}
 
-  try {
-    posts = await getRecentPosts();
-  } catch (error) {
-    errorMessage =
-      error instanceof Error ? error.message : "Could not load WordPress posts.";
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getHomePage();
+
+  if (!page) {
+    return {
+      title: "Home | Own It",
+      description:
+        "Create a published WordPress page with slug home to edit this homepage in Gutenberg.",
+    };
+  }
+
+  const title = stripTags(page.title.rendered);
+  const description = stripTags(page.excerpt.rendered);
+
+  return {
+    title: title ? `${title} | Own It` : "Own It",
+    description: description || undefined,
+  };
+}
+
+export default async function Home() {
+  const page = await getHomePage();
+
+  if (!page) {
+    return (
+      <main className={styles.main}>
+        <div className={`${styles.content} ${styles.setup} wp-content`}>
+          <p className={styles.setupTitle}>Homepage not set up yet</p>
+          <p>
+            Create a <strong>published</strong> WordPress page with slug{" "}
+            <code>{getHomePageSlug()}</code>, then build the homepage in
+            Gutenberg. Changes appear here within about a minute after you
+            publish.
+          </p>
+          <p>
+            Pantheon: <strong>Pages → Add New</strong> → set the URL slug to{" "}
+            <code>{getHomePageSlug()}</code> → publish.
+          </p>
+        </div>
+      </main>
+    );
   }
 
   return (
     <main className={styles.main}>
-      <section className={styles.hero}>
-        <p className={styles.eyebrow}>Continuing Education</p>
-        <h1 className={styles.title}>Headless WordPress + Next.js</h1>
-        <p className={styles.description}>
-          This starter is set up for a business website. Core pages come from
-          WordPress, while Next.js handles the frontend experience.
-        </p>
-      </section>
-
-      <section className={styles.section}>
-        <h2 className={styles.sectionTitle}>Latest posts</h2>
-        {errorMessage ? (
-          <p className={styles.error}>{errorMessage}</p>
-        ) : null}
-        <div className={styles.grid}>
-          {posts.map((post) => (
-            <article key={post.id} className={styles.card}>
-              <h3
-                className={styles.cardTitle}
-                dangerouslySetInnerHTML={{ __html: post.title.rendered }}
-              />
-              <div
-                className={styles.excerpt}
-                dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}
-              />
-              <a
-                className={styles.link}
-                href={post.link}
-                target="_blank"
-                rel="noreferrer"
-              >
-                Read on WordPress
-              </a>
-            </article>
-          ))}
-        </div>
-      </section>
+      <div
+        className={`${styles.content} wp-content`}
+        dangerouslySetInnerHTML={{ __html: page.content.rendered }}
+      />
     </main>
   );
 }

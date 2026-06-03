@@ -29,7 +29,7 @@ Key constraint: the **Pantheon Advanced Page Cache** plugin must be active on th
 
 ### `src/lib/wordpress.ts`
 
-Central WP REST client. Three exported helpers — `getRecentPosts`, `getPageBySlug`, `getBusinessPages` — plus a `requestWordPressJSON` core that:
+Central WP REST client. Exported helpers — `getHomePage`, `getPageBySlug`, `getRecentPosts`, `getBusinessPages` — plus a `requestWordPressJSON` core that:
 
 1. Tries `/wp-json/<route>` first.
 2. Falls back to `?rest_route=<route>` (some local WP setups expose REST only this way).
@@ -39,7 +39,7 @@ When `NEXT_PUBLIC_USE_MOCK_WP=true` (or `NEXT_PUBLIC_WORDPRESS_URL` is unset), t
 
 ### Routing model
 
-- `src/app/page.tsx` — homepage, lists recent WP posts.
+- `src/app/page.tsx` — homepage; loads WP page slug `home` (or `NEXT_PUBLIC_HOME_PAGE_SLUG`) and renders Gutenberg HTML.
 - `src/app/[slug]/page.tsx` — catch-all for any WP page; calls `getPageBySlug(slug)` and 404s if missing.
 - `src/app/<name>/page.tsx` for `about`, `be-counted`, `owners`, `podcast`, `events`, `services`, `contact` — explicit routes that exist alongside `[slug]`. Adding a new top-level explicit route only makes sense if it needs custom layout/data beyond what `[slug]` provides (e.g. `podcast/` pulls from Megaphone RSS via `src/lib/megaphone.ts`).
 

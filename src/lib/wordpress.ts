@@ -88,6 +88,15 @@ export async function getPageBySlug(slug: string): Promise<WordPressPage | null>
   return pages[0] ?? null;
 }
 
+/** Slug of the WordPress page rendered at `/`. Override with NEXT_PUBLIC_HOME_PAGE_SLUG. */
+export function getHomePageSlug(): string {
+  return process.env.NEXT_PUBLIC_HOME_PAGE_SLUG?.trim() || "home";
+}
+
+export async function getHomePage(): Promise<WordPressPage | null> {
+  return getPageBySlug(getHomePageSlug());
+}
+
 export async function getBusinessPages(): Promise<WordPressPage[]> {
   if (useMockWordPress || !wordpressUrl) {
     return getMockPages();
@@ -141,6 +150,19 @@ function getMockPosts(limit: number): WordPressPost[] {
 
 function getMockPages(): WordPressPage[] {
   return [
+    {
+      id: 200,
+      slug: "home",
+      title: { rendered: "Home" },
+      excerpt: {
+        rendered: "Homepage content managed in WordPress (Gutenberg).",
+      },
+      content: {
+        rendered:
+          '<p class="has-large-font-size">Welcome to Own It. Edit this page in WordPress — slug <code>home</code> — to build the homepage in Gutenberg.</p>',
+      },
+      link: "#",
+    },
     {
       id: 201,
       slug: "about",

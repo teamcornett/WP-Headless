@@ -22,7 +22,7 @@ flowchart LR
 ```
 
 1. A visitor requests a page from the Vercel-hosted Next.js app.
-2. Each page component is a **server component** that calls `getPageBySlug` / `getRecentPosts` in [`src/lib/wordpress.ts`](../src/lib/wordpress.ts).
+2. Each page component is a **server component** that calls `getHomePage` / `getPageBySlug` in [`src/lib/wordpress.ts`](../src/lib/wordpress.ts).
 3. Those helpers `fetch()` the WordPress REST API at `${NEXT_PUBLIC_WORDPRESS_URL}/wp-json/wp/v2/...` with `next: { revalidate: 60 }`.
 4. The request hits Pantheon's Fastly edge first. On HIT it returns instantly. On MISS, Fastly asks the WordPress origin and caches the response.
 5. Vercel renders the HTML and returns it to the visitor. Subsequent visitors hit Vercel's own cache for up to 60 seconds, then Vercel re-fetches from Pantheon.
@@ -35,7 +35,7 @@ flowchart LR
 src/
   app/
     layout.tsx          # Site shell, fonts, header/footer
-    page.tsx            # Homepage, renders WP posts
+    page.tsx            # Homepage — WP page slug home (Gutenberg)
     [slug]/page.tsx     # Catch-all dynamic WP pages
     about/page.tsx       # WP page slug "about"
     be-counted/page.tsx  # WP page slug "be-counted"

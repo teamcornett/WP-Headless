@@ -99,7 +99,7 @@ You should see:
 ✓ Ready in ~800ms
 ```
 
-Open [http://localhost:3000](http://localhost:3000). The homepage's "Latest posts" section should render the actual posts in Pantheon Dev (e.g. `Hello world!` until real content is added).
+Open [http://localhost:3000](http://localhost:3000). The homepage loads the WordPress page with slug **`home`** (Gutenberg content). Create that page in Pantheon if `/` returns 404 — see [wordpress-pantheon.md](./wordpress-pantheon.md#required-page-slugs-for-the-frontend).
 
 ## 6. Verify the headless connection
 
@@ -114,7 +114,7 @@ curl -I https://dev-until-you-ownit.pantheonsite.io/wp-json/wp/v2/posts
 
 **b) Frontend pages load**
 
-- [http://localhost:3000](http://localhost:3000) — homepage with posts
+- [http://localhost:3000](http://localhost:3000) — homepage (WP page slug `home`)
 - [http://localhost:3000/about](http://localhost:3000/about) — pulls WP page slug `about`
 - [http://localhost:3000/be-counted](http://localhost:3000/be-counted) — pulls WP page slug `be-counted`
 - [http://localhost:3000/owners](http://localhost:3000/owners) — pulls WP page slug `owners`
@@ -123,7 +123,7 @@ curl -I https://dev-until-you-ownit.pantheonsite.io/wp-json/wp/v2/posts
 - [http://localhost:3000/services](http://localhost:3000/services)
 - [http://localhost:3000/contact](http://localhost:3000/contact)
 
-If any of `/about`, `/be-counted`, `/owners`, `/podcast`, `/events`, `/services`, or `/contact` is blank, the matching page hasn't been created yet on Pantheon. Create it in WP Admin (see [wordpress-pantheon.md](./wordpress-pantheon.md#required-page-slugs-for-the-frontend)).
+If any of `/`, `/about`, `/be-counted`, `/owners`, `/podcast`, `/events`, `/services`, or `/contact` is blank or 404, the matching page hasn't been created yet on Pantheon. Create it in WP Admin (see [wordpress-pantheon.md](./wordpress-pantheon.md#required-page-slugs-for-the-frontend)).
 
 **c) Network requests hit Pantheon**
 

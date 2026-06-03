@@ -1,108 +1,37 @@
 @use "../styles/mixins" as m;
-@use "../styles/variables" as v;
 
+// Homepage is full-bleed: no max-width shell or horizontal/vertical page padding.
 .main {
-  @include m.page-shell();
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
 }
 
-.hero {
-  margin-bottom: v.$space-12;
+.content {
+  @include m.rich-content();
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+
+  // Editors control the hero in blocks; hide the default page-title H1 from Gutenberg.
+  :global(h1:first-of-type),
+  :global(.wp-block-post-title) {
+    display: none;
+  }
 }
 
-.eyebrow {
-  color: v.$color-text-subtle;
-  font-size: 0.875rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-}
-
-.title {
+.setupTitle {
   font-family: var(--font-bebas-neue), Arial, Helvetica, sans-serif;
-  font-size: 5rem;
-  font-weight: 400;
-  letter-spacing: 0.02em;
-  line-height: 5rem;
-  color: #3764E5;
-  margin-top: v.$space-3;
+  font-size: 2rem;
+  line-height: 1.1;
+  margin: 0 0 1rem;
+  color: #3764e5;
 }
 
-.description {
-  color: v.$color-text-muted-light;
-  margin-top: v.$space-4;
+.setup {
   max-width: 42rem;
-}
-
-.section {
-  margin-top: v.$space-5;
-}
-
-.sectionTitle {
-  font-family: var(--font-bebas-neue), Arial, Helvetica, sans-serif;
-  font-size: 1.5rem;
-  font-weight: 400;
-  letter-spacing: 0.02em;
-  line-height: 1;
-}
-
-.error {
-  background: rgb(255 251 235);
-  border: 1px solid rgb(251 191 36 / 0.4);
-  border-radius: v.$radius-md;
-  color: rgb(120 53 15);
-  font-size: 0.875rem;
-  margin-top: v.$space-4;
-  padding: v.$space-4;
-}
-
-.grid {
-  display: grid;
-  gap: v.$space-4;
-  margin-top: v.$space-5;
-}
-
-.card {
-  border: 1px solid v.$color-border-light;
-  border-radius: v.$radius-lg;
-  padding: v.$space-5;
-}
-
-.cardTitle {
-  font-size: 1.125rem;
-  font-weight: 500;
-  margin-bottom: v.$space-2;
-}
-
-.excerpt {
-  color: v.$color-text-muted-light;
-  font-size: 0.875rem;
-  margin-bottom: v.$space-3;
-}
-
-.link {
-  font-size: 0.875rem;
-  font-weight: 500;
-  text-decoration: underline;
-  text-underline-offset: 4px;
-}
-
-@include m.respond-md {
-  .title {
-    font-size: 5rem;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .description,
-  .excerpt {
-    color: v.$color-text-muted-dark;
-  }
-
-  .card {
-    border-color: v.$color-border-dark;
-  }
-
-  .error {
-    background: rgb(69 26 3 / 0.4);
-    color: rgb(253 230 138);
-  }
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
 }
